@@ -1,4 +1,6 @@
-const path = require('path');
+//Dovrebbe togliere ./ e sostituirlo con @ - ma non funziona
+
+/* const path = require('path');
 
 module.exports = {
   resolve: {
@@ -10,4 +12,4 @@ module.exports = {
       // ...etc
     },
   },
-}
+} */

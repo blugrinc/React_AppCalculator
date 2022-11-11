@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import Keyboard from "./components/keyboard/Keyboard";
+import Display from "./components/display/Display";
+import Structure from "./components/structure/Structure";
+import Button from "./components/keyboard/Button";
+
+//Instanzio un array con tutti i bottoni che voglo nella mia calcolatrice. 
+//Poi facciop il rendering multiplo con map dopo aver concatenato con flat gli elemtneti degli array
+
+const btnValues = [  
+  [ "7", "8", "9", "/" ],
+  [ "4", "5", "6", "x" ],
+  [ "1", "2", "3", "+" ],
+  [ ".", "0", "C", "-" ],
+  ["DEL", "="]
+]
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Structure>
+        <Display />
+        <Keyboard>       
+          {btnValues.flat().forEach((btn, i) => (            
+            <Button
+            value = { btn } key = { i }
+            />
+          ))}  
+        </Keyboard>
+        
+        <h1>Hello Word!</h1>
+      </Structure>
     </div>
   );
 }
