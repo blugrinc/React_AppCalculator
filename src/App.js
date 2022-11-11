@@ -2,6 +2,7 @@ import Keyboard from "./components/keyboard/Keyboard";
 import Display from "./components/display/Display";
 import Structure from "./components/structure/Structure";
 import Button from "./components/keyboard/Button";
+import CalculatorProvider from "./context/CalculatorContext"
 
 //Instanzio un array con tutti i bottoni che voglo nella mia calcolatrice. 
 //Poi facciop il rendering multiplo con map dopo aver concatenato con flat gli elemtneti degli array
@@ -17,20 +18,21 @@ const btnValues = [
 
 function App() {
   return (
-    <div>
+   //i componenti dentro CalcProvider potranno accedervi ai contatti 
+    //calc e alla funzione setCalc
+    <CalculatorProvider> 
       <Structure>
         <Display />
         <Keyboard>       
-          {btnValues.flat().forEach((btn, i) => (            
+          {btnValues.flat().map((btn, i) => (            
             <Button
-            value = { btn } key = { i }
+              value={btn}
+              key={i}
             />
           ))}  
         </Keyboard>
-        
-        <h1>Hello Word!</h1>
       </Structure>
-    </div>
+    </CalculatorProvider>
   );
 }
 
