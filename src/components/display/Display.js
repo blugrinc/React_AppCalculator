@@ -1,10 +1,10 @@
 import { CalculatorContext } from '../../context/CalculatorContext'
-import React, { useContext } from 'react'
+import React from 'react'
 import { Textfit } from 'react-textfit';
 
 
-const Display = () => {
-  const { calculator } = useContext(CalculatorContext) //Questa mi serve per richiamare CalcContex e prendere .num e -sing .res
+export const Display = () => {
+  const { calculator } = React.useContext(CalculatorContext) //Questa mi serve per richiamare CalcContex e prendere .num e -sing .res
   
   //<div className='display'>12345</div> - lo sostituisco con tsxFit
   //lo installo con npm i react-textfit
@@ -14,4 +14,3 @@ const Display = () => {
   )
 }
 
-export default Display 
