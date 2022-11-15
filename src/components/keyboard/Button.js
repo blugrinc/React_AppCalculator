@@ -49,7 +49,37 @@ const Button = ({ value }) => {
       ...calculator,
       num: numberValue
     })
- } 
+  } 
+
+//Operatori 
+  const signClick = () => {
+    setCalc({
+      sign: value,
+      res: !calculator.res && calculator.num ? calculator.num : calculator.res,
+      num: 0
+    })
+  }
+//Funzione matematica per calcolare 
+  const equalsClick = () => {
+    //Se res e num non sono zero allora procedi con math
+    if (calculator.res && calculator.num) {
+      const math = (a, b, sign) => {
+      const result = {
+        '+': () => a + b,
+        '-': () => a - b, 
+        'x': () => a * b, 
+        '/': () => a / b
+      }
+      return result[ sign ](a, b);
+      }
+      setCalc({
+        res: math(calculator.res, calculator.num, calculator.sign),
+        sign: '',
+        num: 0
+      })
+      
+    } 
+  }
   
   //Metodo che crea l'evento al click dei pulsanti 
   const handleClick = () => { 
@@ -58,10 +88,15 @@ const Button = ({ value }) => {
       //Runno la funzione commaClick 
       '.': commaClick,
       'DEL': resetClick,
-      'C': deleteClick
+      'C': deleteClick,
+      '/': signClick,
+      'x': signClick,
+      '-': signClick,
+      '+': signClick,
+      '=': equalsClick
     }
     //Se passo un valore presente dentro result, allora ritorna una delle tre funzioni.     
-    if (results[ value ]) {
+    if (results[value]) {
       return results[value]()
     } else { //se il value è undefined, ritorna questa funzione
       return handleClickNumber()
