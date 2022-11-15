@@ -5,37 +5,45 @@ import { CalculatorContext } from '../../context/CalculatorContext'
 //devo rendere il className dinamico. - <button className='button'> {value} </button> -
 const Button = ({ value }) => {
   //Prendo e instanzio le variabili del Context
-  const { calculator ,setCalc } = useContext(CalculatorContext);
+  const { calculator, setCalc } = useContext(CalculatorContext);
   
-//Funzione per il punto 
-    const commaClick = () => {
-      setCalc({
-        // "..." Spread operator, ci permette di copiare rapidamente tutto o parte di un array o oggetto
-        ...calculator,        
-        num: !calculator.num.toString().includes('.') ? calculator.num + value : calculator.num
-      })
+  //Funzione per il punto 
+  const commaClick = () => {
+    setCalc({
+      // "..." Spread operator, ci permette di copiare rapidamente tutto o parte di un array o oggetto
+      ...calculator,
+      num: !calculator.num.toString().includes('.') ? calculator.num + value : calculator.num
+    })
   }
 
-//funzione per resettare
-    const resetClick = () => {
-      setCalc({     
-        sign: '',
-        num: 0,
-        res: 0        
-      })
+  //funzione per resettare
+  const resetClick = () => {
+    setCalc({
+      sign: '',
+      num: 0,
+      res: 0
+    })
   }
   
   //funzione per cancellare
-  const deleteClick = () => {      
-    setCalc({            
-        num: calculator.num.toString().slice(0,-1)
-      })    
+  const deleteClick = () => {  
+    
+    let numberValue;
+    if (calculator.num === undefined) {
+      numberValue = "0"
+    } else {
+      numberValue = calculator.num.toString().slice(0, -1)
+    }
+    setCalc({
+      ...calculator,
+      num: numberValue
+    })        
   }
   
 // funzioner per stampare i numeri
   const handleClickNumber = () => {
     //value.toString prende il lavore della key che è un numero è lo converte in stringa 
-    const numberString = value.toString()
+    const numberString = value.toString();
 
     let numberValue;
     //Controllo per evitare di scrivere 000000 senza un numero primario iniziale
