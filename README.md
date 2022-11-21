@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-![Alt text](/public/calculator.jpg?raw=true "Calculator_ScreenShot")
+![Alt text](React_AppCalculator/public/calculator.png?raw=true "Calculator_ScreenShot")
 
 ## Available Scripts
 
