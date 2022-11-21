@@ -17,8 +17,7 @@ This is a basic project to go deep into the study of certain technologies such a
 - [Button function](#Button-Function)
 
 ## App
-The application is organised as follows. 
-External structure and grafted inside are the display and keyboard. 
+The layout of the general structure was first defined. Then the 'Display' and 'Keyboard' were defined. 
 ```
 function App() {
   return (
