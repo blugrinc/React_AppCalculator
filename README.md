@@ -1,71 +1,101 @@
-# Getting Started with Create React App
+# React_App
+#### Installation 
+```
+npm install
+npm i react-textfit
+```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-![Alt text](React_AppCalculator/public/calculator.png?raw=true "Calculator_ScreenShot")
+## Calculator
+This is a basic project to go deep into the study of certain technologies such as React. Application is structured is organised in such a way that it is easy to understand and use. 
 
-## Available Scripts
+![alt text](https://github.com/blugrinc/React_AppCalculator/blob/master/public/calculator.png?raw=true)
 
-In the project directory, you can run:
+## Main Features
 
-### `npm start`
+- [App](#App)
+- [CreateContext](#CreateContext)
+- [Button function](#Button-Function)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## App
+The application is organised as follows. 
+External structure and grafted inside are the display and keyboard. 
+```
+function App() {
+  return (
+    <CalculatorProvider> 
+      <Structure>        
+        <Display />
+       <Keyboard>       
+          {btnValues.flat().map((btn, i) => (            
+            <Button
+              value={btn}
+              key={i} 
+              />
+          ))}  
+        </Keyboard> 
+      </Structure>
+    </CalculatorProvider>
+  );
+}
+```
+Keyboard creates as many buttons as there are elements inside btnValues. 
+```
+const btnValues = [  
+  [ "7", "8", "9", "/" ],
+  [ "4", "5", "6", "x" ],
+  [ "1", "2", "3", "+" ],
+  [ ".", "0", "C", "-" ],
+  ["DEL", "="]
+]
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## CreateContext
+I use the CreateContext to define the calculator's default settings and share them with all components. 
+```
+ const [ calculator, setCalc ] = useState({
+        sign: "",
+        num: 0,
+        res: 0
+    });
+```
 
-### `npm test`
+## Button function
+The handleClick function calls the individual functions if 'value' is defined within 'results'. In case the value is "undefined" I will return the numberValue. 
+```
+const handleClick = () => { 
+    const results = {
+      '.': commaClick,
+      'DEL': resetClick,
+      'C': deleteClick,
+      '/': signClick,
+      'x': signClick,
+      '-': signClick,
+      '+': signClick,
+      '=': equalsClick
+    }
+    if (results[value]) {
+      return results[value]()
+    } else {
+      return handleClickNumber()
+    }
+  }
+  ```
+  To modify the CSS of individual buttons, I used a function getClassName, which reads the value of the button and returns customised markup for that button. 
+  ```
+  return (
+    <button onClick={handleClick} className={`${getClassName(value)} button`}> {value} </button>
+    )
+}
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+const getClassName = function (btn) {
+    const className = {
+        '=': 'equals',
+        'DEL': 'delete',
+        'x': 'opt',
+        '/': 'opt',
+        '+': 'opt',
+        '-': 'opt',
+    }
+    return className[btn]
+}
+```
