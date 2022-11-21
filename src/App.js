@@ -20,7 +20,7 @@ const btnValues = [
   b: 2
 } */
 
-// test?.a - dot notation
+// testA?.a - dot notation
 // const {a} = testA - destrutturazione
 // const { a: nuovoNomeVariabile } = testA; - cambiare nome all'oggetto
 
